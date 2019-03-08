@@ -2,12 +2,11 @@ package com.Message.App.Controllers;
 
 
 import com.Message.App.DTOOperations.DTOOperations;
-import com.Message.App.DTOs.MessageServiceDTO.MessageServiceRequestDTO;
-import com.Message.App.DTOs.MessageServiceDTO.MessageServiceResponseDTO;
-import com.Message.App.Mappers.MessageServiceMapper.MessageServiceMapper;
-import com.Message.App.Services.IMessageService;
-import com.Message.App.Services.MessageServiceEnum;
-import com.Message.App.Validators.MessageValidator.MessageValidator;
+import com.Message.App.MessageServiceDTO.MessageServiceRequestDTO;
+import com.Message.App.MessageServiceDTO.MessageServiceResponseDTO;
+import com.Message.App.MessageServiceMapper.MessageServiceMapper;
+import com.Message.App.Services.INotificationService;
+import com.Message.App.MessageServiceValidator.MessageServiceValidator;
 import com.Message.Contracts.MessageResponse.NotificationError;
 import com.Message.Contracts.MessageRequest.MessageRequest;
 import com.Message.Contracts.MessageResponse.MessageResponse;
@@ -17,24 +16,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 
 @RestController
 @RequestMapping(path = "/NotificationService")
 public class NotificationController
 {
     @Autowired
-    private MessageValidator messageValidator;
+    private MessageServiceValidator messageServiceValidator;
 
     @Autowired
     private MessageServiceMapper messageServiceMapper;
 
     @Autowired
-    private DTOOperations dtoOperations;
-
-    @Autowired
-    private Map<String, IMessageService> messageServiceMap;
+    private INotificationService notificationService;
 
     @RequestMapping(path = "/sendMessage", method = RequestMethod.POST, consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<ResponseModel<MessageResponse>> sendMessage(@RequestBody MessageRequest messageRequest)
@@ -43,16 +37,13 @@ public class NotificationController
         NotificationError notificationError = new NotificationError();
         try
         {
-            messageValidator.validateMessageRequest(messageRequest);
+            messageServiceValidator.validateMessageRequest(messageRequest);
             MessageServiceRequestDTO messageServiceRequestDTO = messageServiceMapper.messageRequestToDto(messageRequest);
-            messageValidator.validateMessageServiceRequestDTO(messageServiceRequestDTO);
-            String countryCode = dtoOperations.getCountryCode(messageServiceRequestDTO);
-            MessageServiceEnum messageServiceEnum = dtoOperations.getMessageService(countryCode);
-            IMessageService messageService = messageServiceMap.get(messageServiceEnum.toString());
-            MessageServiceResponseDTO messageServiceResponseDTO = messageService.sendMessage(messageServiceRequestDTO);
-            messageValidator.validateMessageServiceResponseDTO(messageServiceResponseDTO);
+            messageServiceValidator.validateMessageServiceRequestDTO(messageServiceRequestDTO);
+            MessageServiceResponseDTO messageServiceResponseDTO = notificationService.sendMessage(messageServiceRequestDTO);
+            messageServiceValidator.validateMessageServiceResponseDTO(messageServiceResponseDTO);
             messageResponse = messageServiceMapper.dtoToMessageResponse(messageServiceResponseDTO);
-            messageValidator.validateMessageResponse(messageResponse);
+            messageServiceValidator.validateMessageResponse(messageResponse);
         }
         catch (IllegalArgumentException e)
         {

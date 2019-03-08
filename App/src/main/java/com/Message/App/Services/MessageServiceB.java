@@ -2,15 +2,14 @@ package com.Message.App.Services;
 
 
 
-import com.Message.App.DTOs.MessageServiceDTO.MessageServiceRequestDTO;
-import com.Message.App.DTOs.MessageServiceDTO.MessageServiceResponseDTO;
+import com.Message.App.InternalContracts.MessageServiceClientB.MessageServiceClientBRequest;
+import com.Message.App.InternalContracts.MessageServiceClientB.MessageServiceClientBResponse;
+import com.Message.App.MessageServiceDTO.MessageServiceRequestDTO;
+import com.Message.App.MessageServiceDTO.MessageServiceResponseDTO;
 
-import com.Message.App.Mappers.MessageServiceMapper.MessageServiceMapper;
+import com.Message.App.MessageServiceMapper.MessageServiceMapper;
 
-import com.Message.App.Validators.MessageValidator.MessageValidator;
-import com.Message.Clients.ClientB.ClientBRequest.ClientBRequest;
-import com.Message.Clients.ClientB.ClientBResponse.ClientBResponse;
-import com.Message.Clients.ClientB.ClientBService.ClientBService;
+import com.Message.App.MessageServiceValidator.MessageServiceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,19 +17,17 @@ import org.springframework.stereotype.Service;
 public class MessageServiceB implements IMessageService
 {
     @Autowired
-    private ClientBService clientBService;
-
+    private MessageServiceValidator messageServiceValidator;
     @Autowired
     private MessageServiceMapper messageServiceMapper;
-
-    @Autowired
-    private MessageValidator messageValidator;
 
     @Override
     public MessageServiceResponseDTO sendMessage(MessageServiceRequestDTO messageServiceRequestDTO)
     {
-        ClientBRequest clientBRequest = messageServiceMapper.dtoToClientBRequest(messageServiceRequestDTO);
-        ClientBResponse clientBResponse = clientBService.sendMessage(clientBRequest);
+        MessageServiceClientBRequest clientBRequest = messageServiceMapper.dtoToClientBRequest(messageServiceRequestDTO);
+        MessageServiceClientBResponse clientBResponse = new MessageServiceClientBResponse();
+        //api call
+        messageServiceValidator.validateClientBResponse(clientBResponse);
         MessageServiceResponseDTO messageServiceResponseDTO = messageServiceMapper.clientBResponseToDto(clientBResponse);
         return messageServiceResponseDTO;
     }
