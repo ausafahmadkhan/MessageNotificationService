@@ -19,34 +19,5 @@ public class App
     {
         SpringApplication.run(App.class, args);
     }
-    @Bean
-    public ClientAService getClientA()
-    {
-        return new ClientAService();
-    }
-    @Bean
-    public ClientBService getClientB()
-    {
-        return new ClientBService();
-    }
-    @Bean
-    public ClientCService getClientC()
-    {
-        return new ClientCService();
-    }
-    @Bean
-    public ClientAValidator getClientAValidator()
-    {
-        return new ClientAValidator();
-    }
-    @Bean
-    public ClientBValidator getClientBValidator()
-    {
-        return new ClientBValidator();
-    }
-    @Bean
-    public ClientCValidator getClientCValidator()
-    {
-        return new ClientCValidator();
-    }
+    
 }
