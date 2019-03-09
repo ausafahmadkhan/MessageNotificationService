@@ -16,13 +16,11 @@ public class NotificationService implements INotificationService
     @Autowired
     private MessageServiceRepository messageServiceRepository;
 
-    @Override
-    public String getCountryCode(MessageServiceRequestDTO messageServiceRequestDTO)
+    private String getCountryCode(MessageServiceRequestDTO messageServiceRequestDTO)
     {
         return messageServiceRequestDTO.getPhoneNumber().substring(0, 3);
     }
-    @Override
-    public MessageServiceEnum getMessageService(String countryCode)
+    private MessageServiceEnum getMessageService(String countryCode)
     {
         ServiceCountryMapDAO serviceCountryMapDAO = messageServiceRepository.findById(countryCode).orElse(null);
         if (serviceCountryMapDAO != null)
