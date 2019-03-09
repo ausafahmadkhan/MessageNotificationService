@@ -1,4 +1,4 @@
-package com.Message.App.MessageServiceValidator;
+package com.Message.App.Validator;
 
 import com.Message.App.InternalContracts.MessageServiceClientA.MessageServiceClientAResponse;
 import com.Message.App.InternalContracts.MessageServiceClientB.MessageServiceClientBResponse;

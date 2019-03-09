@@ -4,8 +4,8 @@ import com.Message.App.InternalContracts.MessageServiceClientC.MessageServiceCli
 import com.Message.App.InternalContracts.MessageServiceClientC.MessageServiceClientCResponse;
 import com.Message.App.MessageServiceDTO.MessageServiceRequestDTO;
 import com.Message.App.MessageServiceDTO.MessageServiceResponseDTO;
-import com.Message.App.MessageServiceMapper.MessageServiceMapper;
-import com.Message.App.MessageServiceValidator.MessageServiceValidator;
+import com.Message.App.Mapper.MessageServiceMapper;
+import com.Message.App.Validator.MessageServiceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

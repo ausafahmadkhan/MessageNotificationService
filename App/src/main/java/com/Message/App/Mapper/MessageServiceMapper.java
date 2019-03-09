@@ -1,4 +1,4 @@
-package com.Message.App.MessageServiceMapper;
+package com.Message.App.Mapper;
 
 import com.Message.App.InternalContracts.MessageServiceClientA.MessageServiceClientARequest;
 import com.Message.App.InternalContracts.MessageServiceClientA.MessageServiceClientAResponse;
