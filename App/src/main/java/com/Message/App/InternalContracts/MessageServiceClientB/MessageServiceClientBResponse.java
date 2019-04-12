@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class MessageServiceClientBResponse
 {
     private String sentStatus;
+    private int statusCode;
 }

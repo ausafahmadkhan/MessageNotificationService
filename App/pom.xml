@@ -18,10 +18,11 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.example.Message</groupId>
-            <artifactId>Clients</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-gson</artifactId>
+            <version>2.5.0</version>
         </dependency>
+
     </dependencies>
 
 

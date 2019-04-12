@@ -34,7 +34,8 @@ public class MessageServiceValidator
     public boolean validateClientAResponse(MessageServiceClientAResponse messageServiceClientAResponse)
     {
         if (messageServiceClientAResponse.getSentStatus() != null &&
-                messageServiceClientAResponse.getSentStatus() != "")
+                messageServiceClientAResponse.getSentStatus() != "" &&
+                messageServiceClientAResponse.getStatusCode() != 200)
             return true;
         throw new IllegalArgumentException();
     }
@@ -42,7 +43,8 @@ public class MessageServiceValidator
     public boolean validateClientBResponse(MessageServiceClientBResponse messageServiceClientBResponse)
     {
         if (messageServiceClientBResponse.getSentStatus() != null &&
-                messageServiceClientBResponse.getSentStatus() != "")
+                messageServiceClientBResponse.getSentStatus() != "" &&
+                messageServiceClientBResponse.getStatusCode() != 200)
             return true;
         throw new IllegalArgumentException();
     }
@@ -50,7 +52,8 @@ public class MessageServiceValidator
     public boolean validateClientCResponse(MessageServiceClientCResponse messageServiceClientCResponse)
     {
         if (messageServiceClientCResponse.getSentStatus() != null &&
-                messageServiceClientCResponse.getSentStatus() != "")
+                messageServiceClientCResponse.getSentStatus() != "" &&
+                messageServiceClientCResponse.getStatusCode() != 200)
             return true;
         throw new IllegalArgumentException();
     }
