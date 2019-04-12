@@ -1,7 +1,7 @@
 package com.Message.App.Services;
 
-import com.Message.App.MessageServiceDTO.MessageServiceRequestDTO;
-import com.Message.App.MessageServiceDTO.MessageServiceResponseDTO;
+import com.Message.App.MessageServiceDTOS.MessageServiceRequestDTO;
+import com.Message.App.MessageServiceDTOS.MessageServiceResponseDTO;
 import com.Message.App.Persistence.Model.ServiceCountryMapDAO;
 import com.Message.App.Persistence.Repository.MessageServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,8 @@ public class NotificationService implements INotificationService
         ServiceCountryMapDAO serviceCountryMapDAO = messageServiceRepository.findById(countryCode).orElse(null);
         if (serviceCountryMapDAO != null)
         {
-            String messageServiceName = serviceCountryMapDAO.getMessageServiceName();
-            for (MessageServiceEnum messageServiceEnum : MessageServiceEnum.values())
-            {
-                if (messageServiceEnum.name() == messageServiceName)
-                    return messageServiceEnum;
-            }
+            MessageServiceEnum messageServiceEnum = MessageServiceEnum.valueOf(serviceCountryMapDAO.getMessageServiceName());
+            return messageServiceEnum;
         }
         throw new IllegalArgumentException();
     }

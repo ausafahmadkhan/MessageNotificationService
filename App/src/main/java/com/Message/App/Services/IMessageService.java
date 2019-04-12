@@ -1,7 +1,7 @@
 package com.Message.App.Services;
 
-import com.Message.App.MessageServiceDTO.MessageServiceRequestDTO;
-import com.Message.App.MessageServiceDTO.MessageServiceResponseDTO;
+import com.Message.App.MessageServiceDTOS.MessageServiceRequestDTO;
+import com.Message.App.MessageServiceDTOS.MessageServiceResponseDTO;
 
 public interface IMessageService
 {

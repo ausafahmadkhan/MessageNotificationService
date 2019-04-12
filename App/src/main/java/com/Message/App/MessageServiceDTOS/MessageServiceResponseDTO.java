@@ -1,4 +1,4 @@
-package com.Message.App.MessageServiceDTO;
+package com.Message.App.MessageServiceDTOS;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

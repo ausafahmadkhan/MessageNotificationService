@@ -1,8 +1,8 @@
 package com.Message.App.Controllers;
 
 
-import com.Message.App.MessageServiceDTO.MessageServiceRequestDTO;
-import com.Message.App.MessageServiceDTO.MessageServiceResponseDTO;
+import com.Message.App.MessageServiceDTOS.MessageServiceRequestDTO;
+import com.Message.App.MessageServiceDTOS.MessageServiceResponseDTO;
 import com.Message.App.Mapper.MessageServiceMapper;
 import com.Message.App.Services.INotificationService;
 import com.Message.App.Validator.MessageServiceValidator;
@@ -38,9 +38,7 @@ public class NotificationController
         {
             messageServiceValidator.validateMessageRequest(messageRequest);
             MessageServiceRequestDTO messageServiceRequestDTO = messageServiceMapper.messageRequestToDto(messageRequest);
-            messageServiceValidator.validateMessageServiceRequestDTO(messageServiceRequestDTO);
             MessageServiceResponseDTO messageServiceResponseDTO = notificationService.sendMessage(messageServiceRequestDTO);
-            messageServiceValidator.validateMessageServiceResponseDTO(messageServiceResponseDTO);
             messageResponse = messageServiceMapper.dtoToMessageResponse(messageServiceResponseDTO);
             messageServiceValidator.validateMessageResponse(messageResponse);
         }
