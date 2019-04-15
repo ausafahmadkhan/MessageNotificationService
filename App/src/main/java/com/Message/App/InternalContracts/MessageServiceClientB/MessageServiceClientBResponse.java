@@ -1,5 +1,6 @@
 package com.Message.App.InternalContracts.MessageServiceClientB;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MessageServiceClientBResponse
 {
+    @JsonProperty("status")
     private String sentStatus;
-    private int statusCode;
+
+    @JsonProperty("message")
+    private String message;
 }

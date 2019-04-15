@@ -1,13 +1,15 @@
 package com.Message.App.Services;
 
+import java.io.IOException;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import com.Message.App.MessageServiceDTOS.MessageServiceRequestDTO;
 import com.Message.App.MessageServiceDTOS.MessageServiceResponseDTO;
 import com.Message.App.Persistence.Model.ServiceCountryMapDAO;
 import com.Message.App.Persistence.Repository.MessageServiceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Map;
-
+@Component
 public class NotificationService implements INotificationService
 {
     @Autowired
@@ -20,6 +22,7 @@ public class NotificationService implements INotificationService
     {
         return messageServiceRequestDTO.getPhoneNumber().substring(0, 3);
     }
+
     private MessageServiceEnum getMessageService(String countryCode)
     {
         ServiceCountryMapDAO serviceCountryMapDAO = messageServiceRepository.findById(countryCode).orElse(null);
@@ -30,8 +33,9 @@ public class NotificationService implements INotificationService
         }
         throw new IllegalArgumentException();
     }
+
     @Override
-    public MessageServiceResponseDTO sendMessage(MessageServiceRequestDTO messageServiceRequestDTO)
+    public MessageServiceResponseDTO sendMessage(MessageServiceRequestDTO messageServiceRequestDTO) throws IOException
     {
         String countryCode = getCountryCode(messageServiceRequestDTO);
         MessageServiceEnum messageServiceEnum = getMessageService(countryCode);

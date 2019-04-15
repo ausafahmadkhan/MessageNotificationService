@@ -1,14 +1,13 @@
-package com.Message.App.Services;
-
+package com.Message.App.Clients.ClientA;
 
 import com.Message.App.InternalContracts.MessageServiceClientA.MessageServiceClientARequest;
 import com.Message.App.InternalContracts.MessageServiceClientA.MessageServiceClientAResponse;
 import org.springframework.web.bind.annotation.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
+import retrofit2.http.POST;
 
-public interface IMessageServiceAAPI
+public interface IMessageServiceClientA
 {
-    @GET("/path")
-    Call<MessageServiceClientAResponse> getMessage(@RequestBody MessageServiceClientARequest messageServiceClientARequest);
+    @POST("/path")
+    Call<MessageServiceClientAResponse> sendMessage(@RequestBody MessageServiceClientARequest messageServiceClientARequest);
 }
